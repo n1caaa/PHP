@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Categorizer</title>
+</head>
+<body>
+    <form method="post" action="">
+        <label for="start">Starting Number:</label>
+        <input type="number" id="start" name="start" required>
+        <br><br>
+        <label for="end">Ending Number:</label>
+        <input type="number" id="end" name="end" required>
+        <br><br>
+        <input type="submit" name="submit" value="Display">
+    </form>
+    
+    <?php
+    if (isset($_POST['submit'])) {
+        $start = $_POST['start'];
+        $end = $_POST['end'];
+
+        // Display the starting and ending numbers
+        echo "<h2>Starting Number: $start</h2>";
+        echo "<h2>Ending Number: $end</h2>";
+
+        // Determine the order of the sequence
+        if ($start <= $end) {
+            $step = 1;
+        } else {
+            $step = -1;
+        }
+
+        // Initialize categories
+        $oddNumbers = '';
+        $evenNumbers = '';
+        $divBy3 = '';
+        $divBy5 = '';
+        $primeNumbers = '';
+
+        // Categorize numbers
+        for ($i = $start; $step > 0 ? $i <= $end : $i >= $end; $i += $step) {
+            // Odd numbers
+            if ($i % 2 != 0) {
+                $oddNumbers .= $i . ' ';
+            }
+
+            // Even numbers
+            if ($i % 2 == 0) {
+                $evenNumbers .= $i . ' ';
+            }
+
+            // Divisible by 3
+            if ($i % 3 == 0) {
+                $divBy3 .= $i . ' ';
+            }
+
+            // Divisible by 5
+            if ($i % 5 == 0) {
+                $divBy5 .= $i . ' ';
+            }
+
+            // Prime numbers
+            if ($i > 1) {
+                $isPrime = true;
+                for ($j = 2; $j <= $i / 2; $j++) {
+                    if ($i % $j == 0) {
+                        $isPrime = false;
+                        break;
+                    }
+                }
+                if ($isPrime) {
+                    $primeNumbers .= $i . ' ';
+                }
+            }
+        }
+
+        // Display categorized numbers
+        echo "<h3>Odd Numbers: $oddNumbers</h3>";
+        echo "<h3>Even Numbers: $evenNumbers</h3>";
+        echo "<h3>Divisible by 3: $divBy3</h3>";
+        echo "<h3>Divisible by 5: $divBy5</h3>";
+        echo "<h3>Prime Numbers: $primeNumbers</h3>";
+    }
+    ?>
+</body>
+</html>
