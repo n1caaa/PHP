@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 - Simplified</title>
+</head>
+
+<body>
+
+    <h1>Exercise 2</h1>
+    <form method="POST">
+        <label for="num1">Number 1:</label>
+        <input type="number" id="num1" name="num1" required><br><br>
+
+        <label for="num2">Number 2:</label>
+        <input type="number" id="num2" name="num2" required><br><br>
+
+        <label for="num3">Number 3:</label>
+        <input type="number" id="num3" name="num3" required><br><br>
+
+        <label for="num4">Number 4:</label>
+        <input type="number" id="num4" name="num4" required><br><br>
+
+        <button type="submit">Show Results</button>
+    </form><br><br>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        // Retrieve each number
+        $num1 = floatval($_POST['num1']);
+        $num2 = floatval($_POST['num2']);
+        $num3 = floatval($_POST['num3']);
+        $num4 = floatval($_POST['num4']);
+
+        // Initialize lowest and highest values with num1
+        $lowest = $num1;
+        $highest = $num1;
+        $lowest_pos = 1;
+        $highest_pos = 1;
+
+        // Compare num2 with the current lowest and highest
+        if ($num2 < $lowest) {
+            $lowest = $num2;
+            $lowest_pos = 2;
+        }
+        if ($num2 > $highest) {
+            $highest = $num2;
+            $highest_pos = 2;
+        }
+
+        // Compare num3 with the current lowest and highest
+        if ($num3 < $lowest) {
+            $lowest = $num3;
+            $lowest_pos = 3;
+        }
+        if ($num3 > $highest) {
+            $highest = $num3;
+            $highest_pos = 3;
+        }
+
+        // Compare num4 with the current lowest and highest
+        if ($num4 < $lowest) {
+            $lowest = $num4;
+            $lowest_pos = 4;
+        }
+        if ($num4 > $highest) {
+            $highest = $num4;
+            $highest_pos = 4;
+        }
+
+        // Display results
+        echo "Lowest Number: $lowest - Num $lowest_pos<br />";
+        echo "Highest Number: $highest - Num $highest_pos<br />";
+    }
+    ?>
+</body>
+
+</html>
