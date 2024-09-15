@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php 
+        echo "Student Grades: <br/>";
+        $students = array(
+            [
+                'Name' => 'John Doe',
+                'Grades' => [85, 90, 78],
+            ],
+            [
+                'Name' => 'Jane Smith',
+                'Grades' => [91, 88, 95],
+            ],
+            [
+                'Name' => 'Mark Lee',
+                'Grades' => [70, 85, 80]
+            ]
+        );
+
+        foreach ($students as $student) {
+            $grades = implode(", ", $student["Grades"]);
+            echo $student["Name"] . " : " . $grades . "<br/>";
+        }
+
+        echo "<br/>Student Averages and Status: <br/>";
+
+        foreach ($students as $student) {
+            $sum = 0;
+            $total = 0;
+
+            foreach ($student['Grades'] as $grade) {
+                $sum += $grade;
+                $total++;
+            }
+            $average = $sum / $total;
+
+            if ($average >= 90) {
+                $status = 'Outstanding';
+            } elseif ($average >= 75 && $average <= 89) {
+                $status = 'Satisfactory';
+            } else {
+                $status = 'Needs Improvement';
+            }
+
+            echo $student["Name"] . " - Average: " . number_format($average, 2) . ", Status: " . $status . "<br/>";
+        }
+    ?>
+</body>
+</html>
