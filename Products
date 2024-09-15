@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <?php
+
+        $product = array(
+            ["name"=> "laptop",
+            "category"=> "electronics",
+            "stock"=> 10,
+        ],
+        ["name"=> "shampoo",
+            "category"=> "cosmetics",
+            "stock"=> 9,
+    ],
+    ["name"=> "notebook",
+            "category"=> "stationery",
+            "stock"=> 18,
+            ]
+);
+
+foreach ( $product as $products ) {
+    echo ucwords("PRODUCT NAME: " . $products['name'] ."<br/> CATEGORY; " . $products['category'] . "<br/> STOCK; " . $products['stock'] . "<br/><br/>");
+}
+    ?>
+    <form action="" method="post">
+        <label for="name">NAME</label> 
+        <input type="text" id="name" name="name">   <BR/>
+
+        <label for="category">CATEGORY</label>
+        <input type="text" id="category" name="category"> <BR/>
+
+        <label for="stock">STOCK</label>
+        <input type="text" id="stock" name="stock"><BR/>
+
+        <input type="submit" value="UPDATE" style="color: pink"><BR/><BR/>
+    </form>
+<?php
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+            $name = $_POST['name'];
+            $category = $_POST['category'];
+            $stock = $_POST['stock'];
+
+            $newProduct=array(
+                "name"=> $name,
+                "category"=> $category,
+                "stock"=> $stock,
+            );
+    
+            array_push($product, $newProduct);
+    
+            ECHO "UPDATING INVENTORY <br/> <br/>";
+    
+            foreach ( $product as $products ) {
+                echo ucwords("PRODUCT NAME: " . $products['name'] ."<br/> CATEGORY; " . $products['category'] . "<br/> STOCK; " . $products['stock'] . "<br/><br/>");}
+            };
+
+        
+        
+    ?>
+
+
+
+
+</body>
+</html>
